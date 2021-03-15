@@ -1,0 +1,82 @@
+<!--index.wxml-->
+<!--
+  框架最大的特点就是让开发者按照某种规则特定的规则去编写代码
+    1.数据在哪(当前数据在页面对象的data属性中)
+    2.绑定到哪(想绑定到哪去就在相应地方做出语法输出)
+-->
+<view class="container">
+<!-- 基本事件的使用，详细看开发者文档 -->
+<button bindtap="buttonBindtap">点击</button>
+  <!--
+     事件冒泡情况测试 :bindtap不能阻止事件冒泡，在元素重叠时，点击时会发生重叠错误 ,
+     catchtap可以阻止事件冒泡
+    -->
+<view style="width:200px;height:200px;background-color:red" bindtap="oneTap">
+  <view style="width:100px;height:100px;background-color:blue" catchtap="twoTap"></view>
+ </view>
+
+ <view catchtap="catchtapOne" data-name="张三" data-age="13">事件冒泡点击1</view>
+ <view catchtap="catchtapTwo" data-hello-world="张三">事件冒泡点击2</view>
+ <!-- 如果需要给事件处理函数指定参数只能通过dataset方式 -->
+  <!--
+  <view class="userinfo">
+    <block wx:if="{{canIUseOpenData}}" calss="userinfo-opendata">
+      <view class="userinfo-avatar" bindtap="bindViewTap">
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName"></open-data>
+    </block>
+    <block wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else> 请使用1.4.4及以上版本基础库 </view>
+    </block>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  -->
+  <text>{{ msg }}</text>
+  <text>{{ person.name }}</text>
+  
+  <text>{{ person.age }}</text>
+  <text>{{ arraydes }}</text>
+  <view wx:for="{{array}}">
+  {{index +1}}: {{item.message}}
+  </view>
+  
+  <text>{{  }}</text>
+  <view wx:for="{{array}}" wx:for-index="idx" wx:for-item="itemName">
+  {{idx}}: {{itemName.message}}
+</view>
+<text>{{ arraydes }}</text>
+<!--
+  mustache语法可以用在：
+  1.innerhtml（用法类似）
+  2.元素的属性上
+  3.可以直接使用字面量和简单的逻辑运算符
+-->
+<text class="" selectable="false" space="false" decode="false">
+  {{ 111+222 }}
+</text>
+<text class="" selectable="false" space="false" decode="false">
+  {{ 500 < 11 ? '对' : '错'}}
+</text>
+
+<block wx:for="{{[1, 2, 3]}}" wx:for-index="idx" wx:for-item="itemName" >
+  <view> {{idx}}: {{itemName}}  </view>
+  <view></view>
+</block>
+<!--
+当语法解析出现了true和flase出现错误的情况，这时候可以使用masetcahe语法解决 {{ }}
+-->
+<checkbox class="" value="true" disabled="true" checked="{{true}}" color="red">
+  
+</checkbox>
+
+
+</view>
